@@ -1,0 +1,436 @@
+TEST:
+1/
+Your mission
+Write a script count_lines.py that reads lines from the user and returns the number of lines.
+$ python3 count_lines.py
+Mathieu
+is
+the
+most
+beautiful
+
+5
+
+$ python3 count_lines.py
+Daniel is
+the strongest
+
+2
+
+$ python3 count_lines.py
+
+0
+
+How to solve this exercice?
+You need to read several lines and count them, so maybe you need a variable to hold the number of lines read so far? Did you notice in the example that your script stops (and outputs the result before quitting) after the user left an empty line? What kind of string is returned when the user just hits Enter without typing anything?
+
+A reminder...
+As said in the introduction, the Sentinel will run pycodestyle to ensure your code respects PEP8's basic style conventions. Once you are done with the exercice, don't forget to run pycodestyle yourself and fix any style error before pushing your work onto the repository.
+# pycodestyle found one style error in file test.py at line 1, character 13
+$ pycodestyle test.py
+test.py:1:13: W291 trailing whitespace
+$
+
+# no error message, the code in file script.py respects the style conventions
+$ pycodestyle script.py
+$
+
+2/
+Your mission
+Write a Rock Paper Scissors game! Prompt the two players for their move, and announce the result.
+
+Your game will be in the file rock_paper_scissors.py
+
+Example
+Here are examples of how your game should behave.
+$ python3 rock_paper_scissors.py
+Player 1? rock
+Player 2? rock
+Draw.
+$ python3 rock_paper_scissors.py
+Player 1? rock
+Player 2? paper
+Player 2 wins.
+$ python3 rock_paper_scissors.py
+Player 1? rock
+Player 2? scissors
+Player 1 wins.
+$ python3 rock_paper_scissors.py
+Player 1? asdasdasd
+Player 2? asdasdasds
+Error.
+$ python3 rock_paper_scissors.py
+Player 1? rock
+Player 2? asdasdasds
+Error.
+$ python3 rock_paper_scissors.py
+Player 1? asdadsad
+Player 2? rock
+Error.
+
+Important
+Don't submit a file that has a different error message than "Error." The Sentinel won't validate your exercise otherwise.
+
+Don't forget!
+Don't forget to run the style guide checker pycodestyle (and fix any style error) before pushing your file on your Git repository. The Sentinel won't forget to check it!
+
+3/
+Your mission
+Write a script play_with_number.py.
+
+Your script will read a number and display all the numbers from 1 to this number (included), with those exceptions:
+
+if a number is divisible by 5, you will display "Play" (instead of the number)
+if it's divisible by 9, you will display "With" (instead of the number)
+if it's divisible by 5 and 9, you will display 'Number' (instead of the number)
+Example
+
+$> python3 play_with_number.py
+Value? 16
+1
+2
+3
+4
+Play
+6
+7
+8
+With
+Play
+11
+12
+13
+14
+Play
+16
+$>
+
+4/
+Your mission
+Write a script easy_square.py that displays a simple square.
+
+Your script will first read (on standard input) the size of the square, and then the 5 characters that you will use to display the square. Take a look at the example!
+$>python3 easy_square.py
+13
+abcdef
+abbbbbbbbbbba
+d           e
+d           e
+d           e
+d           e
+d           e
+d           e
+d           e
+d           e
+d           e
+d           e
+d           e
+accccccccccca
+$>
+
+Edge cases
+The first input will always be a number, the second one will always be 5 characters.
+If the size is 1, display only one corner.
+If the size is equal to or below 0, print "Invalid value".
+
+5/
+Your mission
+Write a script pyramid.py that asks for the size of a pyramid and prints the pyramid of that size.
+
+The size will always be a positive integer.
+
+Look carefully at the examples to handle special cases.
+
+Example
+
+$ python3 pyramid.py
+What pyramid size do you want?
+9
+    #
+   ###
+  #####
+ #######
+#########
+
+$ python3 pyramid.py
+What pyramid size do you want?
+10
+    #
+   ###
+  #####
+ #######
+#########
+
+$ python3 pyramid.py
+What pyramid size do you want?
+25
+            #
+           ###
+          #####
+         #######
+        #########
+       ###########
+      #############
+     ###############
+    #################
+   ###################
+  #####################
+ #######################
+#########################
+
+$ python3 pyramid.py
+What pyramid size do you want?
+3
+ #
+###
+
+$ python3 pyramid.py
+What pyramid size do you want?
+2
+#
+
+$ python3 pyramid.py
+What pyramid size do you want?
+1
+#
+
+6/
+Your mission
+Write a script named repl.py.
+
+In this exercice, you will have to write a small repl - that is, a read-eval-print-loop. 
+You read the standard entry, do something based on what you just read, print the output if needed, 
+and loop back at the beginning to wait for another entry.
+
+Here are the different actions possible. You have to follow the same order to evaluate which action should be taken:
+
+if the string you read is 'quit', you quit
+if the length of string you read is 6, display My length is 6
+if the first letter of the string is a, e, i, o or u, display 4 times the 2nde, 3rd and 4th letter of the string 
+(see the example)
+if the string is one of "ls", "cat", "rev" or "pwd", display I know the command XXX !! (replace XXX by the name of the command)
+if the string starts with a 0 and doesn't end with a 9, display all the numbers present in the string
+else do nothing
+Example
+
+$>python3 repl.py
+repl> hello!
+My length is 6
+repl> abcdefg
+bcd
+bcd
+bcd
+bcd
+repl> cat
+I know the command cat !!
+repl> 0 I have several numbers 1 2  3 4
+0
+1
+2
+3
+4
+repl> abcdef
+My length is 6
+bcd
+bcd
+bcd
+bcd
+repl> 0 I finish with 9
+repl> pouette
+repl> quit
+$>
+
+7/
+Your mission
+Write a script named mas_o_menos.py.
+
+The goal of this exercice is to create a mini game where you need to guess a number. 
+For the purpose of the exercice, the result to guess will be specified on the standard entry 
+(though obviously that makes the guessing part a lot easier...!).
+
+The player has 10 tries to guess the number.
+
+If the player guesses right, you will display Congrats ! and quit.
+
+If the player guesses a number smaller than the result :
+
+if the difference is above 50 you will display It's way more.
+if the difference is 50 or less you will display It's more.
+
+If the player guesses a number bigger than the result :
+if the difference is above 50 you will display It's way less.
+if the difference is 50 or less you will display It's less.
+If the player doesn't find the result after 10 tries, you will display You lose :(.
+
+Take a look at the example, you need to reproduce the exact same output to make the Sentinel happy!
+
+Example
+$> python3 mas_o_menos.py
+What is the result? 100
+OK, let's begin
+
+Your guess? (10 left) 3
+It's way more
+Your guess? (9 left) 59
+It's more
+Your guess? (8 left) 200
+It's way less
+Your guess? (7 left) 180
+It's way less
+Your guess? (6 left) 140
+It's less
+Your guess? (Half way done) 130
+It's less
+Your guess? (4 left) 120
+It's less
+Your guess? (3 left) 90
+It's more
+Your guess? (2 left) 95
+It's more
+Your guess? (1 left) 98
+It's more
+Your guess? (Last guess) 99
+It's more
+You lose :(
+$> python3 mas_o_menos.py
+What is the result? 100
+OK, let's begin
+
+Your guess? (10 left) 100
+Congrats !
+$>
+
+8/
+Your mission
+Write a program prime_numbers.py that asks for a number 
+and prints all prime numbers up to that number.
+
+Example
+Here are examples of how your program should behave.
+
+$ python3 prime_numbers.py
+Let's print the prime numbers up to? 2
+2
+$ python3 prime_numbers.py
+Let's print the prime numbers up to? -2
+$ python3 prime_numbers.py
+Let's print the prime numbers up to? 7
+2
+3
+5
+7
+
+Note
+We won't try to send inputs that aren't integers 
+to your program. We won't try with huge numbers either.
+
+9/
+Your mission
+Write a program tchou_tchou.py that prints a train of 
+various sizes.
+
+Example
+Here are examples of how your program should behave.
+
+$ python3 tchou_tchou.py
+What is the size of your train? 0
+$ python3 tchou_tchou.py
+What is the size of your train? 1
+ ______________________>__
+|]||[]_[]_[]|||[]_[]_[]||[|
+\==o-o======o-o======o-o==/
+$ python3 tchou_tchou.py
+What is the size of your train? 2
+ _________________________   ______________________>__
+|]||[]_[]_[]|||[]_[]_[]||[| |]||[]_[]_[]|||[]_[]_[]||[|
+\==o-o======o-o======o-o==/_\==o-o======o-o======o-o==/
+$ python3 tchou_tchou.py
+What is the size of your train? -1
+Don't be so negative.
+
+Note
+We will try to send inputs that aren't integers to 
+your program. You will notice that the locomotive 
+has a different design, but all wagons after that are 
+identical.
+
+
+10/
+Your mission
+You have done your shopping and it's time to checkout. 
+You want to give as few banknotes and coins as possible 
+to pay your bill.
+
+Payment is made in Japanese yen, and you can use 
+any official banknotes and coins.
+
+You have to look at the example below to figure out 
+the edge cases (what happens when the bill is 0? 
+When it's negative?)
+
+Your program will be called money.py.
+
+Example
+$ python3 money.py 
+What's the bill ? 3451
+1 2000 banknote
+1 1000 banknote
+4 100 coin
+1 50 coin
+1 1 coin
+$ python3 money.py 
+What's the bill ? 0
+Oh, it was free !
+$ python3 money.py 
+What's the bill ? -98
+Well, it's you who owes me money then.
+
+Note
+Only integers will be sent to your program.
+
+11/
+Your mission
+You have to write a script squares.py that asks 
+for a number n and then prints n squares.
+
+Example
+$ python3 squares.py
+How many squares do you need?
+1
+###
+# #
+###
+
+$ python3 squares.py
+How many squares do you need?
+2
+#######
+#     #
+# ### #
+# # # #
+# ### #
+#     #
+#######
+
+$ python3 squares.py
+How many squares do you need?
+5
+###################
+#                 #
+# ############### #
+# #             # #
+# # ########### # #
+# # #         # # #
+# # # ####### # # #
+# # # #     # # # #
+# # # # ### # # # #
+# # # # # # # # # #
+# # # # ### # # # #
+# # # #     # # # #
+# # # ####### # # #
+# # #         # # #
+# # ########### # #
+# #             # #
+# ############### #
+#                 #
+###################
