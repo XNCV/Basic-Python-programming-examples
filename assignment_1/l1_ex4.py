@@ -6,21 +6,9 @@ elif(size == 1):
 	print(charaters[0])
 else:
 	# The first line
-	add = ''
-	for i in range(size - 2):
-		add = add + charaters[1]
-	line = charaters[0] + add + charaters[0]
-	print(line)
-	# The next line
-	add = ''
-	for i in range(size - 2):
-		add = add + ' '
-	line = charaters[3] + add + charaters[4]
-	for i in range(size - 2):
-		print(line)
+	print(charaters[0] + (size - 2)*charaters[1] + charaters[0])
+	# The next lines
+	for _ in range(size - 2):
+		print(charaters[3] + (size - 2)*' ' + charaters[4])
 	# The final line
-	add = ''
-	for i in range(size - 2):
-		add = add + charaters[2]
-	line = charaters[0] + add + charaters[0]
-	print(line)
+	print(charaters[0] + (size - 2)*charaters[2] + charaters[0])
