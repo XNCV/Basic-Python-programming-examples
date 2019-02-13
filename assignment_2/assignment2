@@ -1,0 +1,324 @@
+1/
+
+Your mission
+Write a function that takes three string parameters 
+and return them as a single string. 
+The first string will be capitalized, the second will be 
+in lowercase, and the last string in uppercase.
+
+Your function must be named concat and in a file named 
+concat.py.
+
+def concat(a, b, c):
+  """Given three arguments, this function returns 
+  a single string.
+
+  >>> concat("hello", "world", "!")
+  "Hello world !"
+  >>> concat("COME", "HERE", "please")
+  "Come here PLEASE"
+  """
+How to solve this exercice?
+The subject asks you to write a function, so you should 
+only submit a file with the function inside. The Sentinel 
+will import your function in its test file.
+
+To test your function, it's as easy as calling it 
+after you have defined it! (Look at the video in 
+the e-learning, it walks you through an example.) 
+Of course, don't forget to remove your tests from 
+your submission file.
+
+Finally, read carefully the subject. Does the function 
+return something...?
+
+2/
+Your mission
+Write a function that takes three parameters which describe
+ a RGB value, and returns the corresponding hexadecimal 
+ value as a string.
+
+In case of invalid parameters, it returns the appropriate 
+error message. A valid value is between 0 and 255 
+(can you guess why?).
+
+Your function must be named rgb and in a file named rgb.py.
+def rgb(r, g, b):
+	"""Given three parameters describing a RGB value, 
+	your function should return the corresponding 
+	hexadecimal value as a string.
+
+	>>> rgb(255, 0, 0)
+	"#ff0000"
+	>>> rgb(-255, 0, 0)
+	"Invalid argument"
+    """
+
+3/
+Your mission
+Write a function that takes three parameters 
+which describe three segment lengths, and returns 
+whether it is a right triangle: it returns True if it is, 
+False otherwise.
+
+We'll only send you positive values.
+
+Your function must be named right_triangle and 
+in a file named right_triangle.py.
+def right_triangle(a, b, c):
+	"""Given three parameters, your function should 
+	return True if it's a right rectangle and false 
+	if it's not.
+
+	>>> right_triangle(17, 15, 8)
+	True
+
+	>>> right_triangle(17, 5, 5)
+	False
+    """
+
+4/
+Your mission
+Write a function that takes an array as a parameter 
+and returns the array without any `None` it might contain.
+
+Your function must be named compact and in a file 
+named compact.py.
+def compact(array):
+	"""Given an array, your function should return said 
+	array without any None entry it might contain.
+
+	>>> compact(["toto", "mathieu", None, "Laurie", 
+	"DaNiEl", None, "Toan"])
+	["toto", "mathieu", "Laurie", "DaNiEl", "Toan"]
+	"""
+
+5/
+Your mission
+Write a function that translates a string into l33tspeak. 
+Only the vowels will be changed, according to the following
+ rule: a -> 4, e -> 3, i -> 1, o -> 0, u -> 8
+
+Your function must be named to_l33t and in a file named 
+to_l33t.py.
+def to_l33t(string):
+  """Given one string, this function returns a string.
+
+  >>> to_l33t("leetspeak, DUDE !")
+  "l33tsp34k, D8D3 !"
+  """
+
+6/
+Your mission
+Write a function that takes an array as a parameter. 
+The function will return an array of arrays. Strings 
+must be grouped by length, each group must be ordered 
+alphabetically.
+
+Your function must be named order_words and in a file 
+named order_words.py.
+def order_words(array):
+  """Given one argument, this function returns an array 
+  of array.
+
+  >>> order_words(['aa', 'laurie', 'daniel', 'toto', 
+  'tata', 'aA', 'AA', 'Aa'])
+  [['AA', 'Aa', 'aA', 'aa'], ['tata', 'toto'], 
+  ['daniel', 'laurie']]
+
+  >>> order_words([])
+  [[]]
+  """
+
+7/
+Your mission
+Write a script that calculates the median from a dataset. You will read the dataset on the standard entry.
+
+If your dataset has an even number of entries, your median will be the average between the two middle values.
+
+Your script will be called median.py.
+
+Example
+Here are examples of how your median calculator should work.
+
+$ python3 median.py
+Give me a series of numbers and I will give you their median.
+6
+9
+3
+6
+1
+1
+
+The median is 4.5
+$ python3 median.py
+Give me a series of numbers and I will give you their median.
+
+Error, empty dataset
+Note
+We won't try to send inputs that aren't integers to your program.
+
+8/
+Your mission
+It's battleship time! Write a function that takes a ships map and a hits map. The function returns True if the ships have been destroyed, False otherwise.
+
+Your function must be named are_ships_destroyed and in a file named battleship.py.
+
+Signature
+def are_ships_destroyed(ships_map, hits_map):
+    """Given a ships map and a hits map this functions returns
+    True if the ships have been destroyed, False otherwise.
+
+    ships_map: str
+    hits_map: str
+
+    Example of ships_map:
+    ---------------------
+    ............
+    .....BBB....
+    ............
+    B...........
+
+    (ships_map == '............\n.....BBB....\n............\nB...........')
+
+    Example of hits_map:
+    --------------------
+    ............
+    ......XX....
+    ............
+    X...........
+
+    (hits_map == '............\n......XX....\n............\nX...........')
+
+    In this case, are_ships_destroyed(ships_map, hits_map) returns False.
+    """
+
+
+9/
+Your mission
+You discovered the grep utility during the first day of your hyperspace. You will now implement a lightweight version of it.
+
+Create a function that takes a text and a string. The function will return an array of all the lines where the string appears. You have to handle the special characters $ and ^.
+
+Your function must be named basic_grep and in a file named basic_grep.py.
+
+Signature
+def basic_grep(text, string):
+  """Given two string arguments, this function returns an array of strings.
+
+  >>> basic_grep("Hellow\nPotato\nMellow", "ow$")
+  ["Hellow", "Mellow"]
+  """
+Note
+Be sure to handle all possible cases.
+
+10/
+Your mission
+Write a function to extract the inner text from an HTML page. You will return the text concatened as a single string, without the markup.
+
+Your function must be named html_parser and in a file named html_parser.py.
+
+Signature
+def html_parser(html):
+  """Given one string argument, this function returns a string.
+
+  >>> html_parser("<html><head><title>Page Title</title></head><body><p>My first <i>paragraph</i>.</p></body></html>")
+  "Page TitleMy first paragraph."
+  """
+Note
+There won't be any '<' or '>' character in the inner text.
+
+11/
+Your mission
+Write a function that takes an array of arrays of words as a parameter. The function will print this array in two dimensions and in an orderly fashion: each column will be as wide as its longest member.
+
+Your function must be named print_tab and in a file named print_tab.py.
+
+Signature
+def print_tab(array):
+  """Given one argument, this function returns nothing.
+
+  >>> print_tab([["this"], ["~~", "is", "~~"], [ "ah!", "oh!", "kind", "", "eh !"], ["1", "2", "3", "of"], ["...", "...", "...", "...", "fun !"]])
+  +++++++++++++++++++++++++++++++++++
+  + this                            +
+  +++++++++++++++++++++++++++++++++++
+  + ~~   + is  + ~~                 +
+  +++++++++++++++++++++++++++++++++++
+  + ah!  + oh! + kind +     + eh !  +
+  +++++++++++++++++++++++++++++++++++
+  + 1    + 2   + 3    + of          +
+  +++++++++++++++++++++++++++++++++++
+  + ...  + ... + ...  + ... + fun ! +
+  +++++++++++++++++++++++++++++++++++
+  >>> print_tab([])
+  ++
+  ++
+  >>> print_tab([[""]])
+  ++++
+  +  +
+  ++++
+  """
+
+Warning
+Be careful with edge cases:
+
+def print_tab(array):
+  """Given one argument, this function returns nothing.
+
+  >>> print_tab([[]])
+  ++
+  ++
+  ++
+  >>> print_tab([[], []])
+  ++
+  ++
+  ++
+  ++
+  ++
+  """
+
+12/
+Your mission
+Your mission is to write a mini sed. 
+
+The parameters will always be well formatted, and we won't test undefined behaviors such as 'y/ooo/abc/' or 'y/abc/bcd/'.
+
+Your function must be named sed and in a file named sed.py.
+
+Signature
+def sed(command, s):
+    """Apply a sed command to a string.
+
+    Two commands are supported:
+        - s/pattern/replacement/g
+        - y/string1/string2/
+
+    This sed is a simple version: in our case, `pattern` is a string, not a
+    regular expression.
+
+    -----
+
+    The first command replaces `pattern` with `replacement`. Any character
+    other than `\` or `\n` can replace `/`.
+
+        >>> sed('s/morning/evening/g', 'Good morning')
+        'Good evening'
+        >>> sed('s👍morning👍evening👍g', 'Good morning')
+        'Good evening'
+        >>> sed('s/afternoon/evening/g', 'Good afternoon.\\nWhat an afternoon')
+        'Good evening.\\nWhat an evening'
+
+    Be careful, sed is applied line by line, so `hello\nworld` is not a good
+    pattern.
+
+    -----
+
+    The second command replaces all characters from `string1` with characters
+    from `string2`. This means that len(string1) == len(string2).
+
+    Any character other than `\` or `\n` can replace `/`.
+
+        >>> sed('y/aeo/430/', 'hello mr wayne')
+        'h3ll0 mr w4yn3'
+    """
+
