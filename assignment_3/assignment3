@@ -1,0 +1,302 @@
+EX
+1/
+Your mission
+Write a function that returns a random int between 0 and 1000 (0 and 1000 included). You will use randint from the random module.
+
+Your function must be named lottery and in the file named lottery.py.
+
+Signature
+def lottery():
+    """
+    This function returns a random int between 0 and 1000.
+    """
+
+2/
+env_hello
+Notions: import and dict
+Your mission
+Write a function that gets the language of the environment and returns a greeting according to that language.
+
+If the language is French (fr_FR) it returns Bonjour!, otherwise it returns Hello!.
+
+Your function must be named env_hello and in the file named env_hello.py.
+
+Signature
+def env_hello():
+	""" Given no argument this function looks up the LANG environment variable and returns the appropriate greeting
+
+	With a fr_FR language environment variable
+	>>> env_hello()
+	'Bonjour!'
+
+	In any other case
+	>>> env_hello()
+	'Hello!'
+    """
+What's the environment?
+The environment is a list of data passed to all programs when they are executed. It contains useful variables like the language of the user, the current working directory, the home directory, etc.
+
+You can run the command env on your terminal to see which variables are present in your environment.
+
+In Python, the environment is accessible through the dictionary os.environ. This dictionary is available to your program once you have imported the module os. Your solution to the exercice should start like this:
+# this should be declared before using the os.environ dictionary
+import os
+
+def env_hello():
+    # the solution of the exercice goes here
+
+
+3/
+count_occurrences
+Notions: dict
+Your mission
+Write a function that takes a string as argument, and returns a dictionary associating the number of occurrences of a word with an array of corresponding words. The arrays will be sorted alphabetically.
+
+Your function must be named count_occurrences and in the file named count_occurrences.py.
+def count_occurrences(string):
+    """Given a string, this function returns the number of occurrences of \\
+    each word.
+
+    >>> count_occurrences('bonjour bla bla toto titi tutu tonton toto toto titi')
+    {2: ['bla', 'titi'], 1: ['bonjour', 'tonton', 'tutu'], 3: ['toto']}
+
+    >>> count_occurrences('daniel mathieu laurie toan toan laurie mathieu mathieu')
+    {3: ['mathieu'], 2: ['laurie', 'toan'], 1: ['daniel']}
+
+    >>> count_occurrences('Lorem ipsum dolor amet consectetur adipiscing elit')
+    {1: ['Lorem', 'adipiscing', 'amet', 'consectetur', 'dolor', 'elit', 'ipsum']}
+    """
+4/
+Your mission
+Write a function that takes a dictionary as an argument. The dictionary contains a movie title as key and an array of actors as value. Your function will return a reverted dictionary, with the name of an actor as key and an array of their movies as value.
+
+An example of dictionary that can be sent to your function is in the file top.dic
+
+Your function must be named bdmi and in the file named bdmi.py.
+
+Signature
+
+def bdmi(dic):
+	"""Given a dictionary with {movie1: [actor1, actor2, actor3], movie2: [actor3, actor5, actor4], ...}, the function returns the dictionary inverted with {actor1: [movie1], actor2: [movie1], actor3: [movie1, movie2], ...}
+
+	>>> bdmi({'The Godfather': ['Marlon Brando', 'Al Pacino'], 'Scarface': ['Al Pacino', 'Michelle Pfeiffer']})
+	{'Marlon Brando': ['The Godfather'], 'Al Pacino': ['The Godfather', 'Scarface'], 'Michelle Pfeiffer': ['Scarface']}
+    """
+
+5/
+lycos
+Notions: advanced dict
+Your mission
+Write a function that pre-computes autocomplete results 
+for a search engine. From a list of words, you will 
+generate a dictionary with the autocomplete results.
+
+Your function must be named generate_autocomplete and in 
+the file named lycos.py.
+
+Signature
+def generate_autocomplete(words):
+    """From a list of words, generate a dictionary with 
+	the autocomplete
+    results.
+
+    >>> generate_autocomplete(['a', 'abc', 'abd', 'abd', 
+	'b'])
+    {'a': {'a', 'abc', 'abd'}, 'ab': {'abc', 'abd'}, 
+	'abc': {'abc'}, 'abd': {'abd'}, 'b': {'b'}}
+    """
+
+6/
+merge_dict
+Notions: advanced dict
+Your mission
+Write a function that takes an array of dictionaries 
+as an argument and merges them into a single dictionary.
+
+Your function must be named merge_dict and in the file 
+named merge_dict.py.
+
+Signature
+def merge_dict(dictionaries):
+	"""Given any number of dictionaries, the function 
+	must merge all of them into a single dictionary.
+
+	>>> merge_dict([{'a':1,'b':2,'c':1,'d':2}, {'e':1,
+	'f':2,'g':2}])
+	{'a': [1], 'b': [2], 'c': [1], 'd': [2], 'e': [1], 
+	'f': [2], 'g': [2]}
+
+	>>> merge_dict([{'a':1,'b':2,'c':1,'d':2}, 
+	{'e':1,'f':2,'b':1,'g':2}, {'h':1,'i':2,'d':1,'b':2}])
+	{'a': [1], 'b': [2, 1, 2], 'c': [1], 'd': [2, 1], 
+	'e': [1], 'f': [2], 'g': [2], 'h': [1], 'i': [2]}
+
+	>>> merge_dict([{'a':1,'b':2,'c':1,'d':2}])
+	{'a': [1], 'b': [2], 'c': [1], 'd': [2]}
+    """
+
+
+7/
+markov
+Notions: advanced dict
+Your mission
+Given a sample sentence, you will create a dictionary that 
+helps predict which words usually come after a given word. 
+This dictionary will hold, for each word as key, 
+a dictionary of words that can come after it and 
+how many times it happened in the sample sentence.
+
+Your function must be named generate_table and in 
+the file named markov.py.
+
+Signature
+def generate_table(s):
+    """
+    From a string 's', generate a dictionary where, 
+	for a given word, you get
+    the words that can come after it and the number 
+	of occurrences it happened in the string 's'.
+
+    Example:
+    If s == 'i am daniel i am french i like jiu-jitsu', 
+	return
+    {
+        'i': {
+            'am': 2,
+            'like': 1,
+        },
+        'am': {
+            'daniel': 1,
+            'french': 1,
+        },
+        'daniel': {
+            'i': 1,
+        },
+        'french': {
+            'i': 1,
+        },
+        'like': {
+            'jiu-jitsu': 1,
+        },
+        'jiu-jitsu': {
+        }
+    }
+    """
+
+8/
+
+find_diff
+Notions: advanced dict
+Your mission
+Write a function that takes two dictionaries and compares them. It will print the keys that are present in the first dictionary, but not in the second.
+
+Your function must be named find_diff and in the file named find_diff.py.
+
+Signature
+def find_diff(d1, d2):
+	"""Given two dictionaries as arguments, the function compares them and prints the missing keys in the d2 dictionary. Missing keys should be sorted in the same order as they were in d1.
+
+	>>> find_diff({'to': "b", 'ti': "b", 'tu': "b", 'te': "b"}, {'to': "b", 'ti': "b", 'tu': "b", 'te': "b"})
+
+	>>> find_diff({'to': "b", 'ti': "b", 'tu': "b", 'te': "b", "truc": "fabs"}, {'to': "b", 'tu': "b", 'te': "b"})
+	Key ti not in d2
+	Key truc not in d2
+
+	>>> find_diff({'to': "b", 'ti': "b", 'tu': "b", 'te': {'tre': "b"}}, {'to': "b", 'tu': "b", 'te': "b"})
+	Key ti not in d2
+	Key te:tre not in d2
+    """
+
+
+9/
+family
+Notions: advanced dict
+Your mission
+Write a function that takes two dictionaries and two names of people, and returns True if the two people are related, False otherwise. Each dictionary has the following information: for each key, the associated value is the parent of the key.
+
+Your function must be named are_related and in the file named family.py.
+
+Signature
+
+def are_related(father_d, mother_d, first, second):
+    """Find out if `first` and `second` are related.
+
+    `father_d` is a dict where for each key, the associated
+    value is the father of key.
+
+    For example, if 'John' is the father of 'Nathalie', then
+    we would have father_d['Nathalie'] == 'John'
+
+    `mother_d` is a dict where for each key, the associated
+    value is the mother of key.
+
+    For example, if 'Martha' is the mother of 'Nathalie', then
+    we would have mother_d['Nathalie'] == 'Martha'
+
+    >>> are_related({'John': 'Jack'}, {}, 'John', 'Jack')
+    True
+    >>> are_related({'John': 'Jack'}, {'Al': 'El'}, 'John', 'El')
+    False
+    >>> are_related({'John': 'Jack', 'Jack': 'Jim'}, {'Jim': 'El'},\
+ 'John', 'El')
+    True
+    """
+
+yaml
+Notions: hardcore dict
+Your mission
+To finish of this day, you will write a YAML parser. Your function will read a YAML string, and returns the corresponding dictionary.
+
+We will only test your code with valid YAML.
+
+Your function must be named loads and in the file named yaml.py.
+
+Signature
+def loads(s):
+    """From a YAML string, return a dictionary.
+
+    >>> loads('key: value')
+    {'key': 'value'}
+    >>> loads('age: 21')
+    {'age': '21'}
+    >>> loads('name: James Bond')
+    {'name': 'James Bond'}
+    >>> loads('name: James Bond\\nage: 37')
+    {'name': 'James Bond', 'age': '37'}
+    >>> loads('John Do: 1337')
+    {'John Do': '1337'}
+    >>> loads('Hello:\\n  fr: Bonjour\\n  de: Hallo')
+    {'Hello': {'fr': 'Bonjour', 'de': 'Hallo'}}
+    >>> loads('Hello:\\n  fr: Bonjour\\n  de: Hallo')
+    {'Hello': {'fr': 'Bonjour', 'de': 'Hallo'}}
+    >>> loads('nest:\\n  ted:\\n    dict: ionary')
+    {'nest': {'ted': {'dict': 'ionary'}}}
+
+    For this exercise, we will work with a subset of YAML.
+    In our subset, a YAML string is composed of elements of this form:
+    KEY: VALUE
+
+    The elements are separated by new lines (\n)
+    KEY is a string that doesn't contain ':'.
+    VALUE can either be a string that doesn't contain ':', or an other dict.
+
+    Example VALUE string:
+    hello: world
+
+    Example VALUE dict:
+    hello:
+      world: 1
+      john: 2
+
+    Here is a full YAML:
+    --------------------
+    What's up ?: Nothing
+    Is there anybody out there?: No
+    Staff:
+      Laurie: F
+      Mathieu: M
+      Lou: M
+      Daniel: M
+    Goldeneye: Pierce Brosnan
+    """
+
