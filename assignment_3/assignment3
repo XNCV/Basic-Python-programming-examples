@@ -242,6 +242,7 @@ def are_related(father_d, mother_d, first, second):
     True
     """
 
+10/
 yaml
 Notions: hardcore dict
 Your mission
