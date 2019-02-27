@@ -10,7 +10,7 @@ def rgb(r, g, b):
 	if r > 255 or r < 0 or g > 255 or g < 0 or b > 255 or b < 0:
 		return('Invalid argument')
 	else:
-		return('#%02x%02x%02x' %(r, g, b))
+		return('#%02x%02x%02x' % (r, g, b))
 
 
 print(rgb(255, 0, 0))
