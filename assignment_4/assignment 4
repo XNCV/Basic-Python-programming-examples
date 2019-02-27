@@ -1,0 +1,336 @@
+1/
+right_triangle_errors
+Notions: exceptions
+Your mission
+Now that you've learnt how to raise exceptions, your mission is to rewrite right triangles. This time if the parameters are either lesser or equal to zero you need to raise a ValueError. If the parameters are not an integer you also need to raise a ValueError.
+
+Your function must be named right_triangle_errors and in the file named right_triangle_errors.py.
+
+Signature
+
+def right_triangle_errors(a, b, c):
+	"""Given three parameters, your function should return True if it's a right triangle and false if it's not.
+
+	>>> right_triangle_errors(17, 15, 8)
+	True
+
+	>>> right_triangle_errors(17, 5, 5)
+	False
+
+	When given incorrect values, the function will raise:
+	ValueError('Incorrect value')
+
+	>>> right_triangle_errors(17, -5, 5)
+	Traceback (most recent call last):
+    ...
+    ValueError: Incorrect value
+
+	>>> right_triangle_errors(17, 'toto', 5)
+	Traceback (most recent call last):
+	...
+    ValueError: Incorrect value
+    """
+
+2/
+itranslate
+Notions: exceptions and dictionaries
+Your mission
+You need to decipher a message from one of the mentors: the message is in French and it needs to be translated into English.
+
+Write a function that takes a dictionary and the string to be translated as arguments, and returns the translated sentence.
+
+If there is a word not included in the dictionary the function will raise KeyError('Missing word').
+
+Your function must be named itranslate and in the file named itranslate.py.
+
+Signature
+def itranslate(dic, string):
+	""" Given two arguments, it returns the translated string using the dictionary.
+
+	>>> itranslate({"bonjour": "hello", "je": "I", "pere": "father", "suis": "am", "ton": "your"}, 'bonjour je suis ton pere')
+	'hello I am your father'
+
+	>>> itranslate({"pain": "bread", "le": "the", "bon": "good", "est": "is"}, 'le pain est bon')
+	'the bread is good'
+
+	If there is a word not included in the dictionary the function will raise
+	KeyError('Missing word')
+
+	>>> itranslate({"bonjour": "hello", "je": "I", "pere": "father", "suis": "am", "ton": "your"}, 'bonjour je suis ton daron')
+	Traceback (most recent call last):
+    ...
+    KeyError: Missing word
+    """
+
+
+3/
+apple_pineapple
+Notions: exceptions
+Your mission
+Pikotaro has memory problems. Help him remember the lyrics of his Apple Pen song.
+
+Write a function that returns the lyrics associated with the two ingredients passed as arguments (be careful, the ingredients must be in the same order than they appear in the song, look at the apple/pen example).
+
+When given ingredients that are not in the lyrics, the function will raise ValueError('It is not in the lyrics').
+
+Your function must be named apple_pen and in the file named pikotaro.py.
+
+Signature
+def apple_pen(first_ingredient, second_ingredient):
+    """Given two ingredients, this function returns the lyrics associated.
+
+    >>> apple_pen('pen', 'apple')
+    'I have a pen, I have a apple\\nUh! Apple-Pen!'
+
+    (It's really 'a apple' not 'an apple')
+
+    >>> apple_pen('pen', 'pineapple')
+    'I have a pen, I have a pineapple\\nUh! Pineapple-Pen!'
+
+    >>> apple_pen('pen', 'pen')
+    'I have a pen, I have a pen\\nUh! Long pen!'
+
+    When given ingredients that are not in the lyrics, the function will raise
+    ValueError('It is not in the lyrics')
+
+    >>> apple_pen('pen', 'watermelon')
+    Traceback (most recent call last):
+     ...
+    ValueError: It is not in the lyrics
+
+    >>> apple_pen('apple', 'pen')
+    Traceback (most recent call last):
+     ...
+    ValueError: It is not in the lyrics
+    """
+
+4/
+french_rap
+Notions: exceptions, dictionaries, and file io
+Your mission
+Write a function that takes the name of a CSV file as argument, reads the file and returns a dictionary. Each key will be the name of a singer, and the value an array of all their songs.
+
+The format of the CSV file is as follow:
+
+song name,singer
+
+When given a CSV that does not exist the function will raise FileNotFoundError('File does not exist').
+
+Your function must be named french_rap and in the file named french_rap.py.
+
+Signature
+def french_rap(csv):
+	"""Given the name of a CSV file as an argument, this function will return a dictionary with the singer as key and an array of their songs as value.
+
+	>>> french_rap('french_rap.csv')
+	{'IAM': ['Petit Frere', 'Bienvenue - Live', 'Noble Art', 'Crecelle'], 'NTM': ['Paris Sous Les Bombes', 'Authentiques ', 'Le Clash: BOSS Vs IV My People (Round 5)']}
+
+	When given a CSV that does not exist the function will raise
+	FileNotFoundError('File does not exist')
+
+	>>> french_rap('french_pop.csv')
+	Traceback (most recent call last):
+    ...
+    FileNotFoundError: File does not exist
+    """
+
+5/
+concat_files
+Notions: file io
+Your mission
+Write a function that takes an arbitrary number of filenames as arguments and concatenate all of them in a file called concatenated_files.
+
+If a file passed as an argument doesn't exist, just skip it. If the file concatenated_files already exists, you will replace it by the new one.
+
+Your function must be named concat_files and in the file named concat_files.py.
+
+Example files
+$ ls
+toto tutu titi
+
+$ cat toto
+I am toto and I have only one line
+
+$ cat titi
+I am titi
+I only have 2 lines
+
+$ cat tutu
+I
+am
+tutu
+and I
+am
+6 lines long
+
+>>> concat_files("toto", "tutu", "titi") 
+
+$ cat concatenated_files
+I am toto and I have only one line
+I
+am
+tutu
+and I
+am
+6 lines long
+I am titi
+I only have 2 lines
+
+Hint
+You first need to figure out how to capture an arbitrary number of arguments, so that you can iterate over the collection of files and... do what you have to do!
+
+6/
+cat
+Notions: file io
+Your mission
+By now you should be familiar with the cat shell utility. Your job today is to reproduce its usage without options.
+
+Your cat.py program will concatenate and output the files passed as arguments. If no argument is given, your program will read and output the content of the standard entry.
+
+Example
+$ echo "I'm on standard entry !" | python3 cat.py
+I'm on standard entry !
+$ echo -n "I'm in a file" > test
+$ cat test
+I'm in a file$ python3 cat.py test
+I'm in a file$
+
+Hint
+Look into what the echo -n option does to understand what's happening and how you should handle the output.
+
+7/
+special_sort
+Notions: exceptions
+Your mission
+Write a script sort_it.py that reads the standard entry, puts all lines into an array and sorts the array with the function special_sort. The script will then output the resulting array.
+
+You have to import the special_sort function from the sorts module, which we will provide.
+
+Signature
+When the special_sort function raises a RuntimeError, your script should display I catch a RuntimeError!. RuntimeError is the only Exception you should catch.
+
+﻿﻿Here is the signature of the special_sort function you will use:
+def special_sort(array):
+	"""Given an array as argument, this function sorts it efficiently and returns the sorted array.
+
+	>>> special_sort(["Hello, my name", "is", "MENU"])
+	["Hello, my name", "MENU", "is"]
+
+	If the function encounters an error while executing, it will raise a RuntimeError.
+
+	>>> special_sort(["I hope it will", "work"])
+  	I catch a RuntimeError!
+  	"""
+Example
+$ python3 sort_it.py
+Hello, my name
+is
+MENU
+
+["Hello, my name", "MENU", "is"]
+$ python3 sort_it.py
+I hope it will
+work
+
+I catch a RuntimeError!
+
+8/
+rotx
+Notions: default arguments
+Your mission
+ROT13 is a simple letter substitution cipher (a way to encrypt a message) that replaces a letter with the 13th letter after it, in the alphabet. Today you will code a rot-x cipher that replaces a letter with the x-th letter after it in the alphabet.
+
+Write a function that takes two arguments: the first one is a string, the second one is by how many characters it should be rotated. By default the second argument should be 13.
+
+It will return the rotated string.
+
+Your function must be named rotx and in the file named rotx.py.
+
+Example
+>>> rotx("Toan is a great cook!")
+'Gbna vf n terng pbbx!'
+
+>>> rotx("Hello!", 1)
+'Ifmmp!'
+
+
+9/
+checksum
+Notions: file io
+Your mission
+A checksum is a series of numbers and letters derived from a block of data. You calculate it by applying an algorithm on a block of data. The MD5 algorithm is frequently used for that purpose.
+
+Write a script checksum.py that will produce the md5 checksums for all files in a given directory. The directory name will passed as an argument to your script. The checksums will be written in a file called checksums, and they will be sorted by file name.
+
+You will use the md5 function from the hashlib library.
+
+Example
+$ ls
+README.md  checksum.py  documents
+$ ls documents/
+Accounting.xls  Mathieu_eating.jpg  Tam_marathon.jpg
+$ python3 checksum.py documents/
+$ ls
+README.md  checksum.py  checksums  documents
+$ cat checksums 
+0a9082478b1a1466f6e56fd5e48db8c4 Accounting.xls
+a8309e606bcb66a13c4e128dc02bf750 Mathieu_eating.jpg
+7c01564327e303b4f9ccab6e9a9b5eef Tam_marathon.jpg
+
+Hint
+., ./, /tmp/mydir and /tmp/mydir/ are all valid directories. Only valid directories will be specified.
+
+10/
+int2base
+Notions: exceptions
+Your mission
+Write a function that returns the string representation of an int in a specified base. By default the base is '0123456789'. ValueError must be raised when the base is not valid.
+
+Your function must be named int2base and in the file named int2base.py.
+
+Examples
+>>> int2base(23)
+'23'
+>>> int2base(5, '01')
+'101'
+>>> int2base(20, base='qwertyuiopasdfghjklz')
+'wq'
+>>> int2base(-23)
+'-23'
+>>> int2base(2, base='):')
+':)'
+>>> int2base(-23, base='0')
+Traceback (most recent call last):
+  ...
+ValueError: The length of base must be >= 2.
+>>> int2base(-23, base='00')
+Traceback (most recent call last):
+  ...
+ValueError: The base must be composed of unique characters.
+>>> int2base(-23, base='-+')
+Traceback (most recent call last):
+  ...
+ValueError: '-' is not a valid character for the base.
+
+
+11/
+ls
+Notions: file io
+Your mission
+You are super familiar with the ls utility by now, right? Cool, let's recode it!
+
+Your function must be named ls and in the file named ls.py.
+
+To calculate the width of the columns, you should follow those rules:
+
+If the longest path is wider than the width of the terminal => you will output everything on a single column
+Else, every column will have the width of the longest path + 1 (for the space)
+Signature
+
+def ls(term_width):
+    """
+    List the current directory's contents.
+
+    The list is printed and should have the same output as `ls` (without arguments).
+    """
+
