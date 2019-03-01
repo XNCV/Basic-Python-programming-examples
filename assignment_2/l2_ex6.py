@@ -14,7 +14,9 @@ def order_words(array):
 						break
 				for element in array_current:
 					array.remove(element)
+			print(array_current)
 			array_current.sort()
+			print(array_current)
 			array_out.append(array_current)
 			array_current = []
 	return array_out
