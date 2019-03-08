@@ -1,0 +1,316 @@
+1/
+abc_range
+Notions: yield
+Your mission
+Write a function that takes two letters as arguments and returns a generator between the two. The order can either be incremental or decremental.
+
+Your function must be named abc_range and in the file named abc_range.py.
+
+Signature
+def abc_range(start, end):
+    """
+    Given two arguments, the function returns a generator between the two
+    letters.
+
+    >>> generator_abc = abc_range('a', 'd')
+    >>> next(generator_abc)
+    'a'
+    >>> next(generator_abc)
+    'b'
+    >>> next(generator_abc)
+    'c'
+    >>> next(generator_abc)
+    Traceback (most recent call last):
+     ...
+    StopIteration
+    >>> generator_abc2 = abc_range('d', 'a')
+    >>> next(generator_abc2)
+    'd'
+    >>> next(generator_abc2)
+    'c'
+    >>> next(generator_abc2)
+    'b'
+    >>> next(generator_abc2)
+    Traceback (most recent call last):
+     ...
+    StopIteration
+    """
+2/
+Your mission
+Write a function that returns the factorial of the number passed as argument.
+
+Your function must be named factorial and in the file named factorial.py.
+
+Signature
+def factorial(n):
+	"""Given one argument, it returns the factorial of said argument
+
+	>>> factorial(0)
+	1
+
+	>>> factorial(1)
+	1
+
+	>>> factorial(2)
+	2
+
+	>>> factorial(3)
+	6
+
+	>>> factorial(4)
+	24
+
+	>>> factorial(10)
+	3628800
+	"""
+Note
+We will always pass a valid int to your function.
+
+3/fibonacci
+Notions: recursion
+Your mission
+Write a function that takes one argument and returns the number at this index in the Fibonacci sequence.
+
+Your function must be named fibonacci and in the file named fibonacci.py.
+
+Signature
+def fibonacci(n):
+	"""Returns the number at this index in the Fibonacci sequence
+
+	>>> fibonacci(0)
+	0
+
+	>>> fibonacci(1)
+	1
+
+	>>> fibonacci(2)
+	1
+
+	>>> fibonacci(3)
+	2
+
+	>>> fibonacci(4)
+	3
+
+	>>> fibonacci(5)
+	5
+
+	>>> fibonacci(6)
+	8
+
+	>>> fibonacci(10)
+	55
+	"""
+
+4/
+fibonacci_generator
+Notions: yield
+Your mission
+Your mission is to create a Fibonacci generator.
+
+Your function must be named fibonacci_generator and in the file named fibonacci_generator.py.
+
+Signature
+def fibonacci_generator():
+    """
+    This function yields the numbers from the Fibonacci sequence.
+    >>> fibo_gen = fibonacci_generator()
+    >>> next(fibo_gen)
+    1
+    >>> next(fibo_gen)
+    1
+    >>> next(fibo_gen)
+    2
+    >>> next(fibo_gen)
+    3
+    >>> next(fibo_gen)
+    5
+    >>> next(fibo_gen)
+    8
+    >>> next(fibo_gen)
+    13
+    >>> next(fibo_gen)
+    21
+    >>> next(fibo_gen)
+    34
+    >>> next(fibo_gen)
+    55
+    >>> next(fibo_gen)
+    89
+    """
+
+5/
+integer_partition
+Notions: yield and recursion
+Your mission
+Write a function that returns a set of all the possible partitions of a number (https://en.wikipedia.org/wiki/Partition_(number_theory)). Each partition is stored as a sorted tuple.
+
+Your function must be named integer_partition and in the file named integer_partition.py.
+
+Signature
+Here are the signature and some examples:
+def integer_partition(n):
+    """Returns a set of partitions for `n`.
+
+    >>> integer_partition(2)
+    {(2,), (1, 1)}
+    >>> integer_partition(3)
+    {(1, 2), (1, 1, 1), (3,)}
+    >>> integer_partition(4)
+    {(1, 3), (1, 1, 1, 1), (1, 1, 2), (4,), (2, 2)}
+    """
+
+6/
+cryptarithm
+Notions: basic algorithms and recursion
+Your mission
+Write a function that solves a cryptarithm passed as an argument to the function.
+
+The cryptarithm is passed as 3 parameters, the two operands and the sum.
+
+Our cryptarithm are going to respect the following conventions:
+
+there will be only one solution possible to the cryptarithm
+each letter corresponds to a single digit
+each digit can only correspond to one letter
+You must return an array where each letter has been changed to its corresponding digit.
+
+Your function must be named solve_cryptarithm and in the file named cryptarithm.py.
+
+Signature
+Here is the signature and some examples
+def solve_cryptarithm(op1, op2, sum):
+	"""Returns the equation with each letter changed to its corresponding digit."""
+
+>>> solve_cryptarithm("SEND", "MORE", "MONEY")
+[9567, 1085, 10652] # 9567 + 1085 = 10652 ; O = 0, M = 1, Y = 2, E = 5, N = 6, D = 7, R = 8, S = 9
+
+
+7/
+operation_maker
+Notions: advanced recursion
+Your mission
+Write a function that, given a list of integers and a result integer, will figure out the appropriate operations to apply to the list elements in order to get the result integer. The function will returns the sequence of operations as a string.
+
+If there is no valid combination of operations, the function returns None.
+
+You cannot change the order of the integers in the array, and there are always parenthesis surrounding the numbers, grouping them from left to right. (Look at the examples!)
+
+Your function must be named operation_maker and in the file named operation_maker.py.
+
+Signature
+def operation_maker(values, total):
+	"""Given two arguments, the function should return a string of the correct equation
+
+	>>> operation_maker([3, 4, 25, 25, 7], 157)
+	'((((3 + 4) * 25) - 25) + 7)'
+	>>> operation_maker([3, 4, 25, 10, 7], 244)
+	None
+	>>> operation_maker([12, 5, 17, 32, 3], 15)
+	'((((12 * 5) + 17) - 32) / 3)'
+    """
+
+8/
+factorial_square
+Notions: advanced recursion
+Your mission
+Write a function that takes a 2D list of 2^n - 1 width and height, and fills the grid with crosses like in the examples.
+
+Look carefully at the examples: the 15x15 grid was first filled with '0' in its middle vertical and horizontal axes, then each of the four squares thus defined was filled with '1' in its middle vertical and horizontal axes, then the sixteen resulting squares were filled with '2'.
+
+You get the idea!
+
+The function will return the 2D list filled with the new values:
+
+For a list of 7x7
+
+[' ', '1', ' ', '0', ' ', '1', ' ']
+['1', '1', '1', '0', '1', '1', '1']
+[' ', '1', ' ', '0', ' ', '1', ' ']
+['0', '0', '0', '0', '0', '0', '0']
+[' ', '1', ' ', '0', ' ', '1', ' ']
+['1', '1', '1', '0', '1', '1', '1']
+[' ', '1', ' ', '0', ' ', '1', ' ']
+For a list of 15x15
+
+[' ', '2', ' ', '1', ' ', '2', ' ', '0', ' ', '2', ' ', '1', ' ', '2', ' ']
+['2', '2', '2', '1', '2', '2', '2', '0', '2', '2', '2', '1', '2', '2', '2']
+[' ', '2', ' ', '1', ' ', '2', ' ', '0', ' ', '2', ' ', '1', ' ', '2', ' ']
+['1', '1', '1', '1', '1', '1', '1', '0', '1', '1', '1', '1', '1', '1', '1']
+[' ', '2', ' ', '1', ' ', '2', ' ', '0', ' ', '2', ' ', '1', ' ', '2', ' ']
+['2', '2', '2', '1', '2', '2', '2', '0', '2', '2', '2', '1', '2', '2', '2']
+[' ', '2', ' ', '1', ' ', '2', ' ', '0', ' ', '2', ' ', '1', ' ', '2', ' ']
+['0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0']
+[' ', '2', ' ', '1', ' ', '2', ' ', '0', ' ', '2', ' ', '1', ' ', '2', ' ']
+['2', '2', '2', '1', '2', '2', '2', '0', '2', '2', '2', '1', '2', '2', '2']
+[' ', '2', ' ', '1', ' ', '2', ' ', '0', ' ', '2', ' ', '1', ' ', '2', ' ']
+['1', '1', '1', '1', '1', '1', '1', '0', '1', '1', '1', '1', '1', '1', '1']
+[' ', '2', ' ', '1', ' ', '2', ' ', '0', ' ', '2', ' ', '1', ' ', '2', ' ']
+['2', '2', '2', '1', '2', '2', '2', '0', '2', '2', '2', '1', '2', '2', '2']
+[' ', '2', ' ', '1', ' ', '2', ' ', '0', ' ', '2', ' ', '1', ' ', '2', ' ']
+Your function must be named factorial_square and in the file named factorial_square.py.
+
+Signature
+def factorial_square(arr):
+	"""Initially given one argument the function returns a 2D list
+	>>> factorial_square([[' ', ' ', ' ', ' ', ' ', ' ', ' '], [' ', ' ', ' ', ' ', ' ', ' ', ' '], [' ', ' ', ' ', ' ', ' ', ' ', ' '], [' ', ' ', ' ', ' ', ' ', ' ', ' '], [' ', ' ', ' ', ' ', ' ', ' ', ' '], [' ', ' ', ' ', ' ', ' ', ' ', ' '], [' ', ' ', ' ', ' ', ' ', ' ', ' ']])
+	[[' ', '1', ' ', '0', ' ', '1', ' '], ['1', '1', '1', '0', '1', '1', '1'], [' ', '1', ' ', '0', ' ', '1', ' '], ['0', '0', '0', '0', '0', '0', '0'], [' ', '1', ' ', '0', ' ', '1', ' '], ['1', '1', '1', '0', '1', '1', '1'], [' ', '1', ' ', '0', ' ', '1', ' ']]
+    """
+
+9/
+eight_queens
+Notions: advanced recursion
+Your mission
+Solve the 8 queens problem! Write a function that yields the solutions of the 8 queens problems.
+
+A solution is a string of this form: '1a-2e-3h-4f-5c-6g-7b-8d'
+
+Your function must be named eight_queens and in the file named queens.py.
+
+Signature
+def eight_queens():
+    """
+    Yields the solutions of the eight queens problem.
+    """
+
+10/
+hanoi
+Notions: advanced recursion
+Your mission
+Solve the Tower of Hanoi!
+
+Write a function that prints the solution to the Tower of Hanoi, given the number of disks as argument.
+
+Your function must be named tower and in the file named hanoi.py.
+
+Example
+Here is an example of output with 2 disks.
+  |     |     |
+  |     |     |
+ ###    |     |
+#####   |     |
+
+  |     |     |
+  |     |     |
+  |     |     |
+#####  ###    |
+
+  |     |     |
+  |     |     |
+  |     |     |
+  |    ###  #####
+
+  |     |     |
+  |     |     |
+  |     |    ###
+  |     |   #####
+
+Signature
+def tower(nb_disks):
+    """Prints the solution to the Hanoi towers."""
+
+
+
+
+
+
