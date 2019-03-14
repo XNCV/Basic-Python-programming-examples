@@ -1,0 +1,437 @@
+Intro/
+RedIntek
+Intro
+Your mission
+Your mission today will be to create a basic implementation of Redis, a popular database system. Don't start looking up databases though, you are not going to use one today! You are going to code a primitive one.
+
+Redis is a key-value database: each data is stored as a pair made of a key and its associated value. Redis is (by default) an "in-memory" database, meaning that once the script stops, all data is lost. The upside is that it's much faster than storing data in a file!
+
+Each exercise in today's series adds a new feature to your "Redintek". Be sure to copy all the code from the previous exercises every time you start a new one!
+
+Each exercise will be submitted in a redintek.py file, in a directory with the same name as the exercise. For example, the first exercise will be in 00_get_put/redintek.py.
+
+0/
+RedIntek
+00_get_put
+Notions: dict
+Your mission
+Let's start with the basics. You will create 2 functions, one to put a pair of key/value in the database and one to get the value of a specific key. If the key already exists during a put operation, the new value will replace the old one.
+
+How can you store your data? You will probably need something that can be accessed... globally?
+
+Signature
+def put(key, value):
+    """Put a pair of key/value in the database
+    >>> put("toto", "tata")
+    >>> put("toto", "titi")
+    >>> put("~pi", 3.14159)
+    >>> put(83, "eighty-three")
+    """
+
+def get(key):
+    """Return the value associated to the key in the database
+    >>> get("toto")
+    "titi"
+    >>> get(300)
+    None
+    """
+
+What we are expecting
+Re-read carefully the introduction. A Redis is an in-memory database: it is born with your script, and it shall die with it! Don't try to save the data to a file at that point, just store the data as Python objects.
+
+1/
+RedIntek
+01_exists
+Notions: dict
+Your mission
+Now that we can store stuff in our database, it's time to add a way to check if a key already exists.
+
+Not too hard, right?
+
+Signature
+def exists(key):
+    """Return True if the key is in the database, False otherwise
+    >>> exists("toto")
+    True
+    >>> exists(300)
+    False
+    """
+
+2/
+02_delete
+Notions: dict
+Your mission
+Ok, we should be careful now - because every time we add a key/value to our database, the database size will increase. Since our RAM is not unlimited, let's add a way to delete a specific key!
+
+Your computer will thank you!
+
+Signature
+def delete(key):
+    """Delete the key from the database
+    >>> delete("toto")
+    >>> delete("not_existing_key")
+    >>> delete(83)
+    """
+
+3/
+RedIntek
+03_incr
+Notions: dict
+Your mission
+Time for some accounting !
+
+We want functions to count things - this will be useful to track things like the number of times a specific function is called (could be useful for optimization... !). The incr and incrby functions will help us do that.
+
+If the key doesn't exist yet, it will be added to the database and set to 0 before the incr or incrby operation is performed.
+
+Of course, you have to be careful: only integers and floats can be incremented.
+
+(As you may have noticed, incr is a special case of incrby. Maybe you can reduce the amount of code by having one function call the other?)
+
+Signature
+def incr(key):
+    """Increment the value associated to `key` by one
+    >>> exists("my_counter")
+    False
+    >>> incr("my_counter")
+    >>> get("my_counter")
+    1
+    >>> put("toto", "tata")
+    >>> incr("toto")
+    Traceback (most recent call last):
+    ...
+    ValueError: Incorrect value
+    """
+
+def incrby(key, delta):
+    """Increment the value associated to `key` by `delta`
+    >>> incrby("my_counter", -10)
+    >>> get("my_counter")
+    -9
+    """
+
+4/
+04_sadd_smembers
+Notions: set
+Your mission
+Good job, we now have an implementation of basic commands. Our redintek is starting to look good!
+
+Now we are going to add functions to use Sets in our database. First, we will add sadd and smembers.
+
+sadd will add the provided value to the set. If the key doesn't exist, it is created; if the current value associated to the key is not a set, it will be replaced by the new set. smembers will return all the values associated to a key, without changing the default order of the set.
+
+Beware, a set only contains unique values... but you knew that, right?
+
+Signature
+def sadd(key, value):
+    """Add `value` to the set associated to `key`
+    >>> exists("staff")
+    False
+    >>> put("staff", "STAFF")
+    >>> sadd("staff", "Daniel")
+    >>> sadd("staff", "Laurie")
+    >>> sadd("staff", "Laurie")
+    """
+
+def smembers(key):
+    """Return the set values associated to `key`
+    >>> smembers("staff")
+    {'Daniel', 'Laurie'}
+    >>> smembers("not_existing_key")
+    None
+    >>> put("a", "A")
+    >>> smembers("a")
+    None
+    """
+
+5/
+RedIntek
+05_sinter_sunion
+Notions: set
+Your mission
+It was fun, wasn't it? Let's now add some tools for our new Sets. We need 2 new functions :
+
+sunion will give us a Set of all elements that are in different Sets. sinter will give us a Set of all elements that are shared between different Sets.
+
+For those functions, a non-existing key will be considered as an empty Set.
+
+Signature
+An example will be clearer: (I know, Madonna did some movies too, but anyway!)
+def sunion(key1, key2):
+    """Return all elements present accross both Sets
+    >> sadd('actors', 'Leonardo DiCaprio')
+    >> sadd('actors', 'Will Smith')
+    >> sadd('actors', 'Scarlett Johansson')
+    >> sadd('singers', 'Madonna')
+    >> sadd('singers', 'Will Smith')
+    >> sunion('actors', 'singers')
+    {'Will Smith', 'Scarlett Johansson', 'Leonardo DiCaprio', 'Madonna'}
+    """
+
+def sinter(key1, key2):
+    """Return all elements shared between both Sets
+    >> sinter('actors', 'singers')
+    {'Will Smith'}
+    """
+
+
+6/
+RedIntek
+06_srem
+Notions: set
+Your mission
+Time to think again about our dear computer memory. Let's save some RAM with a delete method for Set values. As you can see, everything that doesn't exist or is not a Set should be consider already deleted.
+
+Signature
+def srem(key, value):
+    """Remove `value` in the set associated to `key`
+    >> put("toto", "tata")
+    >> sadd("numbers", 28)
+    >> srem("numbers", 28)
+    >> smembers("numbers")
+    {}
+    >> srem("numbers", 28)
+    >> srem("toto", 28)
+    >> srem("not_existing_key", 28)
+    """
+
+7/
+RedIntek
+07_return_values
+Notions: code clarity
+07_return_values
+Phewww! It was tough but we have a pretty good redintek. Still, it feels like something is missing... It lacks some developer-love™. 🌴
+
+Coding is not a purely solitary job - some people will use your functions or read your code, and your job is to be as nice as possible to them. That's why you should only use self-descripting function names, self-explanatory variable names (not 'a' or 'b' !), and you should return a useful "return value".
+
+So let's change our existing functions :
+
+put should now return the new value (it's better than returning nothing !)
+delete should now return True or False depending on if it really deleted something
+incr and incrby should now return the new value (useful to avoid another get call)
+sadd should return the value just added (once again, not super useful but better than returning nothing)
+srem should now return True or False depending on if it really deleted something
+🌈 Clean code makes developers happy, clean code makes the world a better place 🌈
+
+
+8/
+RedIntek
+08_multiple_args
+Notions: multiple arguments
+Your mission
+Can we improve the developer-love™? Let's add support for multiple arguments to some of our functions. Believe me, anybody using your code will mentally thank you for that.
+
+delete
+delete should now take at least 1 argument (and up to as many as we want). It will return the number of actual deletions.
+>> put(1, 'one')
+>> put(2, 'two')
+>> put(3, 'three')
+>> delete(2, 1, "not_existing_key", 1)
+2
+
+sadd
+sadd should now take at least 2 arguments: the key, and n (at least one) values. It will return the number of insertions.
+>> exists('singers')
+False
+>> sadd('singers', 'Michael Jackson', 'Madonna', 'Elvis', 'Madonna')
+3
+>> smembers('singers')
+{'Elvis', 'Madonna', 'Michael Jackson'}
+
+
+9/
+RedIntek
+09_hash
+Notions: dict
+Your mission
+Ok, now that everything looks good and shiny, let's add a new type: the Hash.
+
+Hash is just another name for dict, and it works just like the python dict.
+
+We can add 3 functions (with proper return values 🌴):
+
+ hset will add a key/value pair to a hash
+ hget will get the value associated to a key in a hash
+ hgetall will get all the key/values in a hash
+Like sadd, hset will replace everything that is not an hash.
+
+Signatures
+If you call hget or hgetall on a non-hash key, it will return None.
+def hset(key, hash_key, hash_value):
+    """Add the `hash_key`/`hash_value` pair to the hash associated to `key`
+    >> hset("Laurie", "hair_color", "black")
+    {'hair_color': "black"}
+    >> hset("Laurie", "height", 1.65)
+    {'height': 1.65}
+    >> hset("Lou", "eyes_color", "blue")
+    {'eyes_color': "blue"}
+    """
+
+def hget(key, hash_key):
+    """Get the value of `hash_key` in the hash associated to `key`
+    >> hget("Laurie", "height")
+    1.65
+    >> hget("Lou", "height")
+    None
+    >> hget("Mathieu", "height")
+    None
+    """
+
+def hgetall(key):
+    """Get all `hash_key`/`hash_value` pairs in the hash associated to `key`
+    >> hgetall("Laurie")
+    {'hair_color': "black", 'height': 1.65}
+    """
+
+10/
+RedIntek
+10_expire
+Notions: expiration
+Your mission
+Let's summarize. We can now store native types (Int, Float, String, Boolean) and 2 complex types (Set and Hash). We have a dozen of functions to interact with our types. We added some nice way to use those functions thanks to return values and multiple arguments. You did a great job, you can be proud of yourself!
+
+Now it's time to add some broader features. And the first one is: expiration.
+
+When you put data in your redintek with put, sadd or hset, you will now specify an expiration date for the key. All of the methods should take this expiration date into account. (It will probably change a lot of things in your code!)
+
+For sadd and hset the expiration date is valid for the whole Set or Hash, not just the value you're inserting. If the Set or Hash already exists, you will update its timeout (or remove it if no expiration date is specified).
+
+Example
+Use time.time() to get the current time!
+>> put("toto", "tata", expires_in=60)
+"tata"
+>> get("toto")
+"tata"
+>> exists("toto")
+True
+>> sadd("countries", "Viet Nam", expires_in=60)
+1
+>> sadd("planets", "Earth")
+1
+>> sadd("planets", "Mars", "Venus", expires_in=60)
+2
+>> sadd("planets", "Pluto <3")
+1
+… wait for 61 seconds...
+>> get("toto")
+None
+>> exists("toto")
+False
+>> exists("countries")
+False
+>> exists("planets")
+True
+
+
+11/
+RedIntek
+11_keys
+Notions: pattern matching
+Your mission
+Another important feature is the function keys.
+
+keys will return a Set with all the keys that match a pattern of your Redintek. The pattern will accept two special characters :
+
+? can replace any character only once. (for exemple tot? will match with toto or tota but not tot nor totot) * can replace any character zero, one, or multiple times. (for exemple tot* will match with toto, tota, tot and totot)
+
+Not so easy, but we will be nice and only test your function with the patterns from the examples (no [], no {}, etc.) and '?' and '*' will not be in any keys. Be brave, you are almost at the end!
+
+Examples
+def keys(pattern):
+    """ Return all keys matching with `pattern`
+    >> put("toto", 2)
+    2
+    >> put("tota", 7)
+    7
+    >> sadd("tot", "a", "b", "c")
+    3
+    >> keys("toto")
+    {'toto'}
+    >> keys("tot?")
+    {'tota', 'toto'}
+    >> keys("?*****t****")
+    {'tot', 'tota', 'toto'}
+    >> keys("????")
+    {'tota', 'toto'}
+    """
+
+12/
+RedIntek
+12_backup
+Notions: file io
+Your mission
+At the beginning of this series, we said that Redis is an in-memory database by default. But you can specify it to store everything in a file, in case the program crashes or stops for any reason.
+
+Do you see where this is going ?
+
+Let's add a way to backup your database in a file and then read it back next time!
+
+Example
+$python
+>>> import redintek
+>>> redintek.put("toto", "tata", ex: 60)
+"tata"
+>>>exit()
+$python
+>>> import redintek
+>>> redintek.get("toto")
+"tata"
+>>>exit()
+$sleep 60 ; python
+>>> import redintek
+>>> redintek.get("toto")
+None
+>>>
+
+That's all folks...
+Here we are! Your very own Redis(-light) made by you!
+
+
+
+
+
+
+
+day 5:
+Project's description
+Approach a difficult but fundamental concept of programming: recursion. Good luck!
+
+Project's notions
+yield (3 exercices)
+recursion (3 exercices)
+basic algorithms (1 exercice)
+advanced recursion (4 exercices)
+Elearning's Courses
+Python: advanced
+ yield & generators
+ recursion
+
+
+day 6:
+
+day 7:
+Project's description
+Practice recursion by coding your own Sudoku solver.
+
+Project's notions
+lists (3 exercices)
+yield (2 exercices)
+backtracking (1 exercice)
+
+day 7 - Bis:
+Project's description
+Understand how data integrity is checked with torrent files.
+
+day 8:
+Project's description
+TankSimulator 2003 - create a small non-graphical game.
+
+Project's notions
+algorithms (10 exercices)
+
+
+Project's description
+For your first (and last) solo project, recode Ag: The Silver Searcher.
+
+Project's notions
+string processing (2 exercices)
