@@ -1,0 +1,431 @@
+Intro
+Today, we are going to solve a Sudoku. Actually, not just one, but all Sudokus on the planet, thanks to our Sudoku solver!
+
+To do that, you will use an algorithm called backtracking. We will guide you through the process of structuring your program, and the algorithm will be up to you. Are you ready for some algorithmic challenge? Let's begin!
+
+Each exercise will be submitted in a sudoku.py file, in a directory with the same name as the exercise. For example, the first exercise will be in 00_to_array/sudoku.py.
+
+0/
+00_to_array
+Notions: lists
+First code
+Ok, so let's start with a file named sudoku.py.
+
+puzzle = '''
+..1.92..3
+...3.745.
+3...6.8..
+.46.5.2..
+2.56.89.7
+..3.7.16.
+..2.1...6
+.687.5...
+1..82.5..
+'''
+
+Your mission
+Write a function to_array that takes a str like puzzle and returns a list of list of int.
+def to_array(puzzle):
+    """
+    Takes a string containing a sudoku and returns a list of list of int.
+
+    Example:
+    ========
+
+    puzzle = '''
+    ..1.92..3
+    ...3.745.
+    3...6.8..
+    .46.5.2..
+    2.56.89.7
+    ..3.7.16.
+    ..2.1...6
+    .687.5...
+    1..82.5..
+    '''
+
+    to_array(puzzle) would return
+    [
+        [0, 0, 1, 0, 9, 2, 0, 0, 3],
+        [0, 0, 0, 3, 0, 7, 4, 5, 0],
+        [3, 0, 0, 0, 6, 0, 8, 0, 0],
+        [0, 4, 6, 0, 5, 0, 2, 0, 0],
+        [2, 0, 5, 6, 0, 8, 9, 0, 7],
+        [0, 0, 3, 0, 7, 0, 1, 6, 0],
+        [0, 0, 2, 0, 1, 0, 0, 0, 6],
+        [0, 6, 8, 7, 0, 5, 0, 0, 0],
+        [1, 0, 0, 8, 2, 0, 5, 0, 0],
+    ]
+    """
+
+1/
+01_has_double
+Notions: lists
+Your mission
+Write a function has_double that returns True if a non-zero number appears twice in an iterable, False otherwise.
+
+def has_double(numbers):
+    """
+    Returns `True` if a number appears twice in `numbers`, `False` otherwise.
+
+    Note: 0 can appear many times.
+
+    >>> has_double([0, 0, 0, 0, 0, 0, 0, 0, 0])
+    False
+    >>> has_double([1, 0, 0, 0, 0, 0, 0, 0, 0])
+    False
+    >>> has_double([1, 1, 0, 0, 0, 0, 0, 0, 0])
+    True
+    """
+
+2/
+02_get_columns
+Notions: yield
+Your mission
+Write a generator get_columns that yields the columns of a sudoku matrix.
+def get_columns(matrix):
+    """
+    Yields the columns of a sudoku matrix.
+
+    Example:
+    ========
+
+    matrix = [
+        [0, 0, 1, 0, 9, 2, 0, 0, 3],
+        [0, 0, 0, 3, 0, 7, 4, 5, 0],
+        [3, 0, 0, 0, 6, 0, 8, 0, 0],
+        [0, 4, 6, 0, 5, 0, 2, 0, 0],
+        [2, 0, 5, 6, 0, 8, 9, 0, 7],
+        [0, 0, 3, 0, 7, 0, 1, 6, 0],
+        [0, 0, 2, 0, 1, 0, 0, 0, 6],
+        [0, 6, 8, 7, 0, 5, 0, 0, 0],
+        [1, 0, 0, 8, 2, 0, 5, 0, 0],
+    ]
+
+    get_columns(matrix) yields
+    - [0, 0, 3, 0, 2, 0, 0, 0, 1]
+    - [0, 0, 0, 4, 0, 0, 0, 6, 0]
+    - ...
+    """
+
+3/
+03_get_blocks
+Notions: yield
+Your mission
+Write a generator get_blocks that yields the blocks of a sudoku matrix.
+def get_blocks(matrix):
+    """
+    Yields the blocks of a sudoku matrix.
+
+    Example:
+    ========
+
+    matrix = [
+        [0, 0, 1, 0, 9, 2, 0, 0, 3],
+        [0, 0, 0, 3, 0, 7, 4, 5, 0],
+        [3, 0, 0, 0, 6, 0, 8, 0, 0],
+        [0, 4, 6, 0, 5, 0, 2, 0, 0],
+        [2, 0, 5, 6, 0, 8, 9, 0, 7],
+        [0, 0, 3, 0, 7, 0, 1, 6, 0],
+        [0, 0, 2, 0, 1, 0, 0, 0, 6],
+        [0, 6, 8, 7, 0, 5, 0, 0, 0],
+        [1, 0, 0, 8, 2, 0, 5, 0, 0],
+    ]
+
+    get_blocks(matrix) yields
+    - [0, 0, 1, 0, 0, 0, 3, 0, 0]
+    - [0, 9, 2, 3, 0, 7, 0, 6, 0]
+    - [0, 0, 3, 4, 5, 0, 8, 0, 0]
+    - [0, 4, 6, 2, 0, 5, 0, 0, 3]
+    - ...
+    """
+
+4/
+04_is_matrix_valid
+Notions: lists
+Your mission
+Write a function is_matrix_valid that returns True if a sudoku matrix is valid, False otherwise.
+def is_matrix_valid(matrix):
+    """
+    Returns `True` if a sudoku matrix is valid, `False` otherwise.
+
+    A sudoku matrix is valid if there is no double in the lines, the columns
+    and the blocks.
+    """
+
+5/
+05_solve
+Notions: backtracking
+Your mission
+Write a function solve that solves a sudoku, given a matrix matrix.
+def solve(matrix, i=0, j=0):
+    """
+    Solves a sudoku matrix.
+
+    This functions returns `True` when the sudoku is solved, `False` when the
+    current `matrix` cannot be solved. In that case, all modifications made to
+    `matrix` must be removed.
+
+    i, j is the current position in the matrix.
+    """
+
+
+======================Day 07 - Bis=====================
+
+Intro
+Your mission
+Our focus today is to understand how data integrity is checked with torrents.
+
+Spoiler: it's thanks to a data structure called a Merkle Tree.
+
+Each of the exercises will be submitted in a torrent.py file, in a directory with the same name as the exercise. For example, the first exercise will be in 00_check_file_integrity/torrent.py.
+
+0/
+00_check_file_integrity
+Hash functions
+A hash function is a function that returns an integer from an arbitrary input. For example, SHA-256 returns an integer of 256 bits (32 bytes).
+
+Hash functions are used to identify stuff (like passwords, or files). If some_hash(s) == some_hash(s2), it's almost sure that s == s2.
+
+Why do I say almost? Well, for example, SHA-256 is 32 bytes, if you take all the inputs of 64 bytes, you'll find collisions. A collision is 2 different inputs having the same hash.
+
+A good hash function is made so that it's really hard, given a hash, to find what input produced it.
+
+That's why we use them to identify password or files.
+
+00_check_file_integrity
+Ok, enough talking, let's code. Write a function check_file_integrity, in a file torrent.py, that checks the integrity of a file.
+def check_file_integrity(path, file_hash):
+    """
+    Returns True if the SHA-256 of the file in `path` matches `file_hash`
+
+    file_hash: str, SHA-256 of the file in hex
+    path: str, path of the file to check
+
+    Example:
+
+    For this file:
+
+    $ cat -e /tmp/hello
+    hello$
+
+    check_file_integrity('/tmp/hello', '5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03')
+    returns True
+    """
+
+1/
+01_get_final_hash
+A trust issue
+Let's say you're downloading a big file. You're getting half of it from a person you don't know.
+
+Let's call the chunks half1 and half2. The information that you have is hash(concat(hash(half1), hash(half2))).
+
+How can the sender prove that the chunk that you received was authentic?
+
+Well, you have half1, so you can compute hash(half1). Now, if that person sends you hash(half2), then you can compute hash(concat(hash(half1), hash(half2)). If it matches the number that you already have, then you got the good data.
+
+01_get_final_hash
+Given a file, split it in 2 and compute sha256(concat(sha256(half1), sha256(half2))). Write a function calledget_final_hash in torrent.py.
+
+def get_final_hash(path):
+    """
+    Splits the file in `path` in two chunks: `half1` and `half2`. Computes
+    the SHA-256 of both chunks: hash1, hash2. Then returns the SHA-256 of
+    concat(hash1, hash2).
+
+    Tips: use `digest`, not `hexdigest`
+
+    The function returns a hash object, not a string.
+
+    Notes:
+    ======
+
+    - The split is done in memory, which means that no new file is created.
+    - Let's say that the file's size is 200B, both chunks will be 100B. If the
+      file's size is 201B, the first chunk will be 101B, the second 100B.
+    """
+
+2/
+02_get_chunks
+02_get_chunks
+Splitting a file in 2 was easy, now, let's split a file in N chunks. In torrent.py write a function get_chunks that yields the N chunks of a file.
+def get_chunks(path, nb_chunks):
+    """
+    Splits the file in `path` in `nb_chunks` chunks and yields the chunks.
+
+
+    Notes:
+    ======
+
+    - The split is done in memory, which means that no new file is created.
+    - Let's say that the file's size is 10B, if we split in 3 chunks, the first one
+      and the second one will be 4B and the last one will be 2B.
+    """
+
+3/
+03_get_merkle_tree
+Merkle tree
+Ok, now you know how to split a file in N chunks. Now let's say many people share those chunks. Everyone downloading those chunks needs a way to verify the integrity of a chunk.
+
+Let's take N == 4. We're going to construct a Merkle Tree.
+chunk1 -> hash(chunk1)
+                      \
+                       hash(concat(hash(chunk1), hash(chunk2)))
+                      /                                        \
+chunk2 -> hash(chunk2)                                          \
+                                                                 \
+                                                                  hash(concat(..., ...))
+                                                                 /
+chunk3 -> hash(chunk1)                                          /
+                      \                                        /
+                       hash(concat(hash(chunk1), hash(chunk2)))
+                      /
+chunk4 -> hash(chunk2)
+
+
+
+
+=====================Project ag=====================
+1/
+ag_basic
+Notions: string processing
+Introduction
+Today, for your first and last solo project of the Hyperspace, we are giving you an exercice that is a bit different from what we've done so far. Up until now, we have helped you decompose all big problems into their smaller components. (Though those that didn't make it this far into the Hyperspace would say that we haven't helped a lot...!)
+
+But at some point you need to learn how to decompose a problem into its smaller parts, and you need to learn to clean up your code and structure it properly.
+
+Therefore the focus for this project is on design decisions.
+
+While this a solo project (each of you is responsible for their own code), this doesn't mean that you must do it on your own without any help. A good way to go about it would be to:
+
+Read the man for ag and test it to understand the functionalities that you need to code
+Design the structure of your code (don't skip that step, that's the point of the project)
+Do a brainstorming with your colleagues to confront your design decisions
+Code that baby!
+Your mission
+Write a python version of ag, the silver searcher.
+
+You should handle this option:
+
+--case-sensitive
+You don't need to handle multiple files in the argument list.
+
+The usage will be: ag PATTERN FILE
+
+Your program will be called ag.py and will be in the directory ag_basic (so the path to your file will be ag_basic/ag.py).
+
+Examples
+Here are some outputs to help you
+
+$ python3 ag.py hello file2
+1:hello sir, hello ma'am
+
+$ python3 ag.py hello file1
+1:hello
+2:HELLO
+3:HELlo
+
+$ python3 ag.py --case-sensitive hello file2
+1:hello sir, hello ma'am
+
+$ python3 ag.py --case-sensitive hello file1
+1:hello
+
+Colors
+Like the original ag, your python version must handle colors.
+
+Here are the color informations from man ag:
+--color-line-number
+      Color codes for line numbers. Default is 1;33.
+
+--color-match
+      Color codes for result match numbers. Default is 30;43.
+
+--color-path
+      Color codes for path names. Default is 1;32.
+
+
+Colors with Python
+Here is how you can print Hello using the 1;33 color code:
+print('\033[1;33mHello\033[0m')
+
+2/
+ag_directories
+Notions: string processing
+Searching in directories
+To complicate things a little, you will now handle searching in a directory.
+
+The usage will be: ag PATTERN [PATH]
+
+You should handle this additional option:
+
+--hidden
+By default, if no path is given, ag will look into the current directory.
+
+Your program will be called ag.py and will be in the directory ag_directories (so the path to your file will be ag_directories/ag.py).
+
+$ python3 ag.py hello
+file2
+1:hello sir, hello ma'am
+
+file1
+1:hello
+2:HELLO
+3:HELlo
+
+$ python3 ag.py --case-sensitive hello
+file2
+1:hello sir, hello ma'am
+
+file1
+1:hello
+
+$ python3 ag.py --hidden hello
+.hidden
+1:Hello, I am a hidden file.
+
+file2
+1:hello sir, hello ma'am
+
+file1
+1:hello
+2:HELLO
+3:HELlo
+
+$ python3 ag.py hello file2
+1:hello sir, hello ma'am
+
+$ python3 ag.py hello .
+file2
+1:hello sir, hello ma'am
+
+file1
+1:hello
+2:HELLO
+3:HELlo
+
+3/
+design guidelines
+Expressive naming
+A code good is a code that is self-descriptive. It doesn't need long explanations, because the name of variables and functions already represent what they are and what they do.
+
+Keeping it down to the minimum
+You need to tidy up your code!
+
+There shouldn't be any extra code outside of functions, any unused imported module, any global variables... And, it goes without saying, don't leave in commented pieces of code.
+
+Single-purpose functions
+A function should do one thing, and only one.
+
+It should also be designed so as to be re-usable in other contexts. If your function contains a small set of instructions only relevant to the parent function, it should probably not be a function.
+
+Keeping it DRY
+Code should never be duplicated. Refactoring plays a huge part in making the code maintainable (because it means that any change in the code is done at one place only, and doesn't have to be replicated all over your program). So identify those instructions that implement the same functionality, and factor them into a function.
+
+Keep in mind the previous rule (single-purpose functions) during the refactoring process, though. Your function should do one thing only, and have a name that describes what it is.
+
+Finally
+And of course, don't do any of the things that we addressed in the daily debriefs!
+
+Code a graphical game world with the pyglet library.
+
