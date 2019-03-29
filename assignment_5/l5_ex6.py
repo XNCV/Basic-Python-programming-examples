@@ -21,6 +21,7 @@ def solve_cruptarithm(op1, op2, sum_op):
 	my_list_num = numbers_cor_letters(num_letters, [])
 	for lis in my_list_num:
 		pass
+		# NEU GIAI QUYET DUOC RECURSION THI TOI DAY RAT DE
 	return list_letters
 
 # print(solve_cruptarithm("SEND", "MORE", "MONEY"))
